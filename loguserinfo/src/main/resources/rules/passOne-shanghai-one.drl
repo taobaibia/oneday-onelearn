@@ -1,0 +1,13 @@
+package com.rules
+import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
+import java.util.List
+
+rule "findName"
+
+when
+//    $list:List()
+    $ShenTestTable:ShenTestTable(boardId  > 10 )
+ then
+    System.out.println($ShenTestTable);
+    System.out.println("和申有关系?");
+ end

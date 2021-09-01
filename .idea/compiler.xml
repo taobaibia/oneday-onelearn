@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="herostory" />
+        <module name="loguserinfo" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo" target="1.8" />
+      <module name="herostory" target="1.8" />
+      <module name="loginfo" target="1.8" />
+      <module name="loguserinfo" target="1.8" />
+      <module name="oneday-onelearn" target="1.8" />
+      <module name="twoday-test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="demo" options="-parameters" />
+      <module name="herostory" options="-parameters" />
+      <module name="loginfo" options="-parameters" />
+      <module name="loguserinfo" options="-parameters -verbose -bootclasspath D:\dev\Java\jre1.8.0_191\lib\rt.jar;D:\dev\Java\jre1.8.0_191\lib\jce.jar" />
+      <module name="oneday-onelearn" options="-parameters" />
+      <module name="twoday-test" options="-parameters" />
+    </option>
+  </component>
+</project>

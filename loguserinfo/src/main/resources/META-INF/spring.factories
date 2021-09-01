@@ -1,0 +1,3 @@
+#springboot ??????????
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.shenzhijie.loguserinfo.common.surceCode.springBootCode.start.MyStart

@@ -1,0 +1,155 @@
+spring:
+  datasource:
+    #    local:
+    #      driver-class-name: com.mysql.cj.jdbc.Driver
+    #      username: root
+    #      url: jdbc:mysql://localhost:3306/homework01?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    #      password: 123456789
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          url: jdbc:mysql://localhost:3306/homework01?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          password: 123456789        # 3.2.0开始支持SPI可省略此配置
+        slave_1:
+          url: jdbc:mysql://106.15.231.226:3306/intellect_isip?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+          username: bi_admin
+          password: Bi@mx2021
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave_2:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          url: jdbc:mysql://localhost:3306/dongyimai?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          password: 123456789
+  profiles:
+    #配置环境
+    active: dev
+
+server:
+  port: 8080
+mybatis:
+  mapper-locations:classpath: mapper/*.xml
+
+#mybatis-plus
+
+
+#swagger3
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: '1.0'
+  description: A sample API to illustrate OpenAPI concepts!!!
+servers:
+  - url: https://api.example.com/v1
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+security:
+  - BasicAuth: [ ]
+
+paths:
+  /artists:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                required:
+                  properties:
+                    artist_name:
+                      type: string
+                    artist_genre:
+                      type: string
+                    albums_recorded:
+                      type: integer
+                    username:
+                      type: string
+        '400':
+          description: The specified user ID is invalid (e.g. not a number)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: A user with the specified ID was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    #  ----- Added lines  ----------------------------------------
+    post:
+      description: Lets a user post a new artist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+              properties:
+                artist_name:
+                  type: string
+                artist_genre:
+                  type: string
+                albums_recorded:
+                  type: integer
+                username:
+                  type: string
+
+      responses:
+        '200':
+          description: Successfully created a new artist
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    #  ---- /Added lines  ----------------------------------------
+#验证码的设置
+kaptcha:
+  height: 50
+  width: 200
+  content:
+    length: 6
+    source: 1234567890qwertyuiopasdfghjklzxcvbnm!@#$%&*
+    space: 2
+  font:
+    color: black
+    name: Arial
+    size: 40
+  background-color:
+    from: red
+    to: yellow
+  border:
+    enabled: true
+    color: black
+    thickness: 1
+
+rocketmq:
+  name-server: localhost:9876
+#  日志输出控制台
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
