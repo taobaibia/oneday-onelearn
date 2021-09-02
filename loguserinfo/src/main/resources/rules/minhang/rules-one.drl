@@ -1,0 +1,30 @@
+package rules.minhang
+import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
+import java.util.List
+
+rule "boardOne"
+
+when
+    $ShenTestTable:ShenTestTable(boardId > 10 );
+ then
+    System.out.println($ShenTestTable);
+    System.out.println("board大于10");
+ end
+
+ rule "boardTwo"
+
+ when
+ //    $list:List()
+     $ShenTestTable:ShenTestTable(boardId  <= 10 )
+  then
+     System.out.println($ShenTestTable);
+     System.out.println("board小于等于10");
+  end
+
+  rule "jay"
+
+  when
+    eval(true)
+   then
+   System.out.println("打印输出----------------");
+   end

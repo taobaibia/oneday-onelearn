@@ -1,0 +1,23 @@
+package rules.xuhui
+import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
+import java.util.List
+
+rule "nameOne"
+
+when
+//    $list:List()
+    $ShenTestTable:ShenTestTable(name not contains "申" )
+ then
+    System.out.println($ShenTestTable);
+    System.out.println("name不包含");
+ end
+
+ rule "nameTwo"
+
+ when
+ //    $list:List()
+     $ShenTestTable:ShenTestTable(name  contains "申" )
+  then
+     System.out.println($ShenTestTable);
+     System.out.println("name包含");
+  end

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+
+    <kbase name="rules" packages="rules">
+        <ksession name="all-rules"></ksession>
+    </kbase>
+    <kbase name="rulesOne" packages="rules.minhang">
+        <ksession name="rules-one"></ksession>
+    </kbase>
+    <kbase name="rulesTwo" packages="rules.xuhui">
+        <ksession name="rules-two"></ksession>
+    </kbase>
+    <kbase name="pdd" packages="rules.minhang">
+        <ksession name="pdd"></ksession>
+    </kbase>
+
+</kmodule>
