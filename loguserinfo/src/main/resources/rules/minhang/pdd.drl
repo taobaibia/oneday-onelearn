@@ -1,0 +1,13 @@
+package rules.minhang
+import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
+import java.util.List
+
+rule "pdd"
+
+when
+    $ShenTestTable:ShenTestTable(boardId > 10 )
+ then
+ System.out.println("---------------------------------------------------------");
+    System.out.println($ShenTestTable);
+    System.out.println("board大于10");
+ end

@@ -5,10 +5,7 @@ import com.shenzhijie.loguserinfo.common.utils.JwtUtils;
 import com.shenzhijie.loguserinfo.web.base.entity.*;
 import com.shenzhijie.loguserinfo.web.base.result.ResultWrapper;
 import com.shenzhijie.loguserinfo.web.config.annotations.TokenCheck;
-import com.shenzhijie.loguserinfo.web.srevice.LeetCodeService;
-import com.shenzhijie.loguserinfo.web.srevice.RegisteredService;
-import com.shenzhijie.loguserinfo.web.srevice.ShenzhijieService;
-import com.shenzhijie.loguserinfo.web.srevice.UmsMemberService;
+import com.shenzhijie.loguserinfo.web.srevice.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,6 +45,8 @@ public class RegisteredController {
     private ShenzhijieService shenzhijieService;
     @Autowired
     private LeetCodeService leetCodeService;
+    @Autowired
+    private RuleService ruleService;
 
     @Operation(summary = "注册login接口")
     @PostMapping("/Registered")
@@ -127,6 +126,12 @@ public class RegisteredController {
     public List<ShenTestTable> findRules(@RequestParam String name) {
         List<ShenTestTable> shenzhijieRules = shenzhijieService.findShenzhijieRules(name);
         return shenzhijieRules;
+    }
+
+    @RequestMapping("/rule")
+    public String rule() {
+        ruleService.rule();
+        return "OK";
     }
 
 }
