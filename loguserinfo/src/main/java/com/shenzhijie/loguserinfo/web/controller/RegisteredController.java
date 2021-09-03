@@ -129,8 +129,8 @@ public class RegisteredController {
     }
 
     @RequestMapping("/rule")
-    public String rule() {
-        ruleService.rule();
+    public String rule(String name) {
+        ruleService.rule(name);
         return "OK";
     }
 

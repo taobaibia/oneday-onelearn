@@ -1,23 +1,59 @@
 package rules.xuhui
 import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
-import java.util.List
+import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo
+import java.util.Map
 
-rule "nameOne"
-
-when
-//    $list:List()
-    $ShenTestTable:ShenTestTable(name not contains "申" )
- then
-    System.out.println($ShenTestTable);
-    System.out.println("name不包含");
- end
-
- rule "nameTwo"
-
+ rule "Boardten"
+salience 10
  when
- //    $list:List()
-     $ShenTestTable:ShenTestTable(name  contains "申" )
+     $ShenTestTable:ShenTestTable(boardId == 10)
+     $map:Map()
   then
-     System.out.println($ShenTestTable);
-     System.out.println("name包含");
+     System.out.println("boardId为:"+$ShenTestTable.getBoardId());
+     $map.put("board1","10");
   end
+
+ rule "BoardHundred"
+salience 9
+ when
+     $ShenTestTable:ShenTestTable(boardId == 100)
+     $map:Map()
+  then
+     System.out.println("boardId为:"+$ShenTestTable.getBoardId());
+     $map.put("board2","100");
+  end
+
+
+   rule "BoardThousand"
+    salience 8
+   when
+       $drools:DroolsPojo(name contains "jay")
+       DroolsPojo(list contains name)
+       $map:Map()
+    then
+       System.out.println("boardId为:"+$drools.getName());
+       $map.put("board3","1000");
+       System.out.println($map.get("board3"));
+       update($map)
+    end
+
+rule "BoardUndefind"
+salience 7
+when
+  $ShenTestTable:ShenTestTable(boardId != 1000)
+  $map:Map()
+then
+    System.out.println("未知boardId为:"+$ShenTestTable.getBoardId());
+    $map.put("board4","bzd");
+end
+
+rule "lala"
+salience 999
+when
+    eval(true)
+    $map:Map()
+then
+System.out.println("==============无论如何都打印的规则====================");
+$map.put("always","zero");
+System.out.println($map.get("always"));
+end
