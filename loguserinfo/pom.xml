@@ -365,6 +365,7 @@
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
                     <include>**/*.yml</include>
+                    <include>**/*.drl</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
