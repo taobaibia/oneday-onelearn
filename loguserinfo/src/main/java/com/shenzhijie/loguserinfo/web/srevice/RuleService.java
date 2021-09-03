@@ -9,7 +9,9 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,25 +26,25 @@ public class RuleService {
     private KieBase kieBase;
 
     public void rule(String name) {
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieClasspathContainer = kieServices.getKieClasspathContainer();
+        KieSession kieSession = kieClasspathContainer.newKieSession("rules-two");
 
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kContainer = ks.getKieClasspathContainer();
-        KieSession kieSession = kContainer.newKieSession("rules-two");
-//        StatelessKieSession kieSession = kieBase.newStatelessKieSession(kContainer.getKieSessionConfiguration("rules-two"));
-
-        Map<String, String> map = new HashMap<>();
-        map.put("key1", "value1");
-        map.put("key2", "value2");
         DroolsPojo droolsPojo = new DroolsPojo();
         droolsPojo.setName(name);
+        List<String> list = new ArrayList<String>();
+        list.add("tom");
+        list.add("jay");
+        Map<String, String> map = new HashMap<>();
+        map.put("key1", "var1");
+        map.put("key2", "var2");
+        droolsPojo.setList(list);
         kieSession.insert(droolsPojo);
         kieSession.insert(map);
-        log.info("查询所有规则.....");
-        System.out.println("执行规则文件前:" + map);
+        System.out.println("执行前--------" + map);
+        //通过规则过滤器实现只执行指定规则
         kieSession.fireAllRules();
-        /**执行指定的规则文件
-         kieSession.fireAllRules(new RuleNameEqualsAgendaFilter("rules-two"));*/
-        System.out.println("执行规则文件后:" + map);
+        System.out.println("执行后--------" + map);
         kieSession.dispose();
     }
 }
