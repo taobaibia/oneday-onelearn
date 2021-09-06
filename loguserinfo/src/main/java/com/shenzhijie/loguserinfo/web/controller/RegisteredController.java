@@ -19,17 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * All rights Reserved, Designed By www.info4z.club
- * <p>title:com.shenzhijie.loginopddd.controller</p>
- * <p>ClassName:LogPassWord</p>
- * <p>Description:TODO(用户登录接口)</p>
- * <p>Compony:Info4z</p>
- * author:zhijieShen
- * date:2021/6/25
- * version:1.0
- * 注意：本内容仅限于公司内部传阅，禁止外泄以及用于其他的商业目的
- */
 @Slf4j
 @RestController
 @Api(tags = "用户接口")
@@ -128,9 +117,25 @@ public class RegisteredController {
         return shenzhijieRules;
     }
 
-    @RequestMapping("/rule")
-    public String rule(String name) {
+    @RequestMapping("/rule1")
+    public String rule1(String name) {
         ruleService.rule(name);
+        return "OK";
+    }
+
+    @RequestMapping("/rule2")
+    public String rule2(String name) {
+        try {
+            ruleService.rule_service(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "OK";
+    }
+
+    @RequestMapping("/rule3")
+    public String rule3(String name) {
+        ruleService.rules_boot_test(name);
         return "OK";
     }
 

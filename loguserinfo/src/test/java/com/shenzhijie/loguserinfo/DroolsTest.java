@@ -3,6 +3,7 @@ package com.shenzhijie.loguserinfo;
 import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo;
 import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable;
 import lombok.extern.slf4j.Slf4j;
+import org.drools.core.base.RuleNameStartsWithAgendaFilter;
 import org.junit.jupiter.api.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -76,8 +77,7 @@ public class DroolsTest {
         kieSession.insert(droolsPojo);
         kieSession.insert(map);
         System.out.println("执行前--------" + map);
-        //通过规则过滤器实现只执行指定规则
-        kieSession.fireAllRules();
+        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("BoardThousand"));
         System.out.println("执行后--------" + map);
         kieSession.dispose();
     }

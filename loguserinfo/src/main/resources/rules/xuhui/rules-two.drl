@@ -28,8 +28,8 @@ salience 9
     salience 8
    when
        $drools:DroolsPojo(name contains "jay")
-       DroolsPojo(list contains name)
-       $map:Map()
+//       DroolsPojo(list contains name)
+       $map:Map(true)
     then
        System.out.println("boardId为:"+$drools.getName());
        $map.put("board3","1000");
