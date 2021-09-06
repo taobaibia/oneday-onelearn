@@ -28,13 +28,13 @@ salience 9
     salience 8
    when
        $drools:DroolsPojo(name contains "jay")
-       DroolsPojo(list contains name)
-       $map:Map()
+//       DroolsPojo(list contains name)
+       $map:Map(true)
     then
        System.out.println("boardId为:"+$drools.getName());
        $map.put("board3","1000");
        System.out.println($map.get("board3"));
-       update($map)
+//       update($map) /*更新规则之后执行*/
     end
 
 rule "BoardUndefind"
