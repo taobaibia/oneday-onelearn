@@ -1,39 +1,37 @@
 package rules.xuhui
 import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
 import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo
-import java.util.Map
+
+/*全局变量*/
+global java.util.Map mapResult;
 
  rule "Boardten"
 salience 10
  when
      $ShenTestTable:ShenTestTable(boardId == 10)
-     $map:Map()
   then
      System.out.println("boardId为:"+$ShenTestTable.getBoardId());
-     $map.put("board1","10");
+     mapResult.put("board1","10");
   end
 
  rule "BoardHundred"
 salience 9
  when
      $ShenTestTable:ShenTestTable(boardId == 100)
-     $map:Map()
   then
      System.out.println("boardId为:"+$ShenTestTable.getBoardId());
-     $map.put("board2","100");
+     mapResult.put("board2","100");
   end
 
 
    rule "BoardThousand"
     salience 8
    when
-       $drools:DroolsPojo(name contains "jay")
-//       DroolsPojo(list contains name)
-       $map:Map(true)
+       $drools:DroolsPojo(name in ("jay","bom"))
     then
-       System.out.println("boardId为:"+$drools.getName());
-       $map.put("board3","1000");
-       System.out.println($map.get("board3"));
+       System.out.println("DroolsPojo.name为:"+$drools.getName());
+       mapResult.put("name","jay");
+       System.out.println(mapResult.get("name"));
 //       update($map) /*更新规则之后执行*/
     end
 
@@ -41,19 +39,17 @@ rule "BoardUndefind"
 salience 7
 when
   $ShenTestTable:ShenTestTable(boardId != 1000)
-  $map:Map()
 then
     System.out.println("未知boardId为:"+$ShenTestTable.getBoardId());
-    $map.put("board4","bzd");
+    mapResult.put("board4","bzd");
 end
 
 rule "lala"
 salience 999
 when
     eval(true)
-    $map:Map()
 then
-System.out.println("==============无论如何都打印的规则====================");
-$map.put("always","zero");
-System.out.println($map.get("always"));
+    System.out.println("==============无论如何都打印的规则====================");
+    mapResult.put("always","zero");
+    System.out.println(mapResult.get("always"));
 end

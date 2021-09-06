@@ -9,9 +9,7 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,21 +59,21 @@ public class DroolsTest {
 
     @Test
     public void test2() {
-        KieServices kieServices = KieServices.Factory.get();
-        KieContainer kieClasspathContainer = kieServices.getKieClasspathContainer();
-        KieSession kieSession = kieClasspathContainer.newKieSession("rules-two");
+        KieSession kieSession = KieServices.Factory.get().getKieClasspathContainer().newKieSession("rules-two");
+//        KieContainer kieClasspathContainer = kieServices.getKieClasspathContainer();
+//        KieSession kieSession = kieClasspathContainer.newKieSession("rules-two");
 
         DroolsPojo droolsPojo = new DroolsPojo();
         droolsPojo.setName("jay");
-        List<String> list = new ArrayList<String>();
-        list.add("tom");
-        list.add("jay");
+//        List<String> list = new ArrayList<String>();
+//        list.add("tom");
+//        list.add("jay");
+//        droolsPojo.setList(list);
         Map<String, String> map = new HashMap<>();
         map.put("key1", "var1");
         map.put("key2", "var2");
-        droolsPojo.setList(list);
         kieSession.insert(droolsPojo);
-        kieSession.insert(map);
+        kieSession.setGlobal("mapResult", map);
         System.out.println("执行前--------" + map);
         kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("BoardThousand"));
         System.out.println("执行后--------" + map);
