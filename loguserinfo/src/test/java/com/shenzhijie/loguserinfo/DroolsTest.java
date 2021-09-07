@@ -60,15 +60,8 @@ public class DroolsTest {
     @Test
     public void test2() {
         KieSession kieSession = KieServices.Factory.get().getKieClasspathContainer().newKieSession("rules-two");
-//        KieContainer kieClasspathContainer = kieServices.getKieClasspathContainer();
-//        KieSession kieSession = kieClasspathContainer.newKieSession("rules-two");
-
         DroolsPojo droolsPojo = new DroolsPojo();
         droolsPojo.setName("jay");
-//        List<String> list = new ArrayList<String>();
-//        list.add("tom");
-//        list.add("jay");
-//        droolsPojo.setList(list);
         Map<String, String> map = new HashMap<>();
         map.put("key1", "var1");
         map.put("key2", "var2");
