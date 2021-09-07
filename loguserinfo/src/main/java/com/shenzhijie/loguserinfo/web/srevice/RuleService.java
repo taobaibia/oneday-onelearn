@@ -27,10 +27,8 @@ public class RuleService {
     /*测试业务不一致*/
     public void rule(String name) {
         KieSession kieSession = KieServices.Factory.get().getKieClasspathContainer().newKieSession("rules-two");
-
         DroolsPojo droolsPojo = new DroolsPojo();
         droolsPojo.setName(name);
-
         Map<String, String> map = new HashMap<>();
         map.put("key1", "var1");
         map.put("key2", "var2");
@@ -88,14 +86,5 @@ public class RuleService {
         kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("BoardThousand"));
         System.out.println("执行后--------" + map);
         kieSession.dispose();
-    }
-
-    /**
-     * 问题代码
-     */
-    public static void main(String[] args) {
-        RuleService ruleService = new RuleService();
-        ruleService.rule("jay");
-
     }
 }
