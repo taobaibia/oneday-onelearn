@@ -2,10 +2,12 @@ package com.shenzhijie.loguserinfo.web.controller;
 
 
 import com.shenzhijie.loguserinfo.common.utils.JwtUtils;
-import com.shenzhijie.loguserinfo.web.base.entity.*;
+import com.shenzhijie.loguserinfo.web.base.entity.other.*;
 import com.shenzhijie.loguserinfo.web.base.result.ResultWrapper;
-import com.shenzhijie.loguserinfo.web.config.annotations.TokenCheck;
-import com.shenzhijie.loguserinfo.web.srevice.*;
+import com.shenzhijie.loguserinfo.web.srevice.LeetCodeService;
+import com.shenzhijie.loguserinfo.web.srevice.RegisteredService;
+import com.shenzhijie.loguserinfo.web.srevice.RuleService;
+import com.shenzhijie.loguserinfo.web.srevice.ShenzhijieService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,8 +30,6 @@ public class RegisteredController {
 
     @Autowired
     private RegisteredService registeredService;
-    @Autowired
-    private UmsMemberService umsMemberService;
     @Autowired
     private ShenzhijieService shenzhijieService;
     @Autowired
@@ -59,13 +59,6 @@ public class RegisteredController {
         return s;
     }
 
-    @Operation(summary = "退出")
-    @PostMapping("/edit")
-    @TokenCheck
-    public ResultWrapper edit(@RequestBody UmsMember umsMember) {
-        System.out.println("edit");
-        return umsMemberService.edit(umsMember);
-    }
 
     @Operation(summary = "测试接口")
     @GetMapping("/test")
@@ -73,7 +66,7 @@ public class RegisteredController {
         registeredService.selectInsert();
     }
 
-    @Operation(summary = "测试plus插件")
+    @Operation(summary = "测试plus插件保存")
     @PostMapping("/test-plus")
     public ShenTestTable test_plus(@RequestBody ShenTestTable shenTestTable) {
         ShenTestTable result = shenzhijieService.saveShenzhijie(shenTestTable);

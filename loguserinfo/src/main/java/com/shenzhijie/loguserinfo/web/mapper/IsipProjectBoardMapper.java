@@ -1,7 +1,7 @@
 package com.shenzhijie.loguserinfo.web.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shenzhijie.loguserinfo.web.base.entity.IsipProjectBoard;
+import com.shenzhijie.loguserinfo.web.base.entity.other.IsipProjectBoard;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

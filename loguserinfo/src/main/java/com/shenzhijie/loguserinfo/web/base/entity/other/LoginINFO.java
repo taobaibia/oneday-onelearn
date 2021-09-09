@@ -1,4 +1,4 @@
-package com.shenzhijie.loguserinfo.web.base.entity;
+package com.shenzhijie.loguserinfo.web.base.entity.other;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,25 +1,25 @@
-package com.shenzhijie.loguserinfo.web.base.entity;
+package com.shenzhijie.loguserinfo.web.base.entity.other;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * All rights Reserved, Designed By www.info4z.club
- * <p>title:com.shenzhijie.loguserinfo.web.base.entity</p>
- * <p>ClassName:ShenTestTable</p>
- * <p>Description:TODO(请用一句话描述这个类的作用)</p>
- * <p>Compony:Info4z</p>
- * author:zhijieShen
- * date:2021/7/28
- * version:1.0
- * 注意：本内容仅限于公司内部传阅，禁止外泄以及用于其他的商业目的
+ * <p>
+ * 项目看板表 isip_project_board
+ * isip库
+ * </p>
+ *
+ * @author zhijieShen 2021-07-14 15:27:16 547
  */
-@TableName(value = "shen_test_table")
+@TableName(value = "isip_project_board")
 @Data
-public class ShenTestTable implements Serializable {
+public class IsipProjectBoard implements Serializable {
     /**
      * id 描述:主键id
      */
@@ -27,34 +27,36 @@ public class ShenTestTable implements Serializable {
     private Long id;
 
     /**
-     * board_id 描述:看板id
+     * project_id 描述:项目编号
      */
-    private Long boardId;
+    @NotEmpty(message = "项目编号不能为空")
+    private String projectId;
 
     /**
      * name 描述:看板名称
      */
+    @NotEmpty(message = "看板名称不能为空")
     private String name;
 
     /**
-     * title 描述:主题
+     * scale 描述:项目进度
      */
-    private String title;
+    private Double scale;
 
     /**
-     * text 描述:内容
+     * status 描述:状态
      */
-    private String text;
+    private String status;
 
     /**
-     * type 描述:分类
-     */
-    private String type;
-
-    /**
-     * is_delete 描述:是否删除（Y：删除，N：不删除）
+     * is_top 描述:是否删除（Y：删除，N：不删除）
      */
     private String isDelete;
+
+    /**
+     * is_top 描述:是否固定（Y：固定，N：不固定）
+     */
+    private String isTop;
 
     /**
      * remark 描述:备注
@@ -89,7 +91,6 @@ public class ShenTestTable implements Serializable {
     /**
      * create_time 描述:创建时间
      */
-    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
@@ -100,7 +101,6 @@ public class ShenTestTable implements Serializable {
     /**
      * update_time 描述:更新时间
      */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**

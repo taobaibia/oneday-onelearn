@@ -1,7 +1,7 @@
 package com.shenzhijie.loguserinfo.web.srevice;
 
-import com.shenzhijie.loguserinfo.web.base.entity.LoginINFO;
-import com.shenzhijie.loguserinfo.web.base.entity.Registered;
+import com.shenzhijie.loguserinfo.web.base.entity.other.LoginINFO;
+import com.shenzhijie.loguserinfo.web.base.entity.other.Registered;
 import com.shenzhijie.loguserinfo.web.base.result.ResultWrapper;
 
 ;

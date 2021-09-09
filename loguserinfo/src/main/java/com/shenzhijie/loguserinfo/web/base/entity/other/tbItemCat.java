@@ -1,4 +1,4 @@
-package com.shenzhijie.loguserinfo.web.base.entity;
+package com.shenzhijie.loguserinfo.web.base.entity.other;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

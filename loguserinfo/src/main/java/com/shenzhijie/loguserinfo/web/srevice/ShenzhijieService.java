@@ -1,7 +1,8 @@
 package com.shenzhijie.loguserinfo.web.srevice;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable;
+import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTable;
+import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTableCopy;
 
 import java.util.List;
 
@@ -23,4 +24,11 @@ public interface ShenzhijieService extends IService<ShenTestTable> {
      * 规则查询
      */
     List<ShenTestTable> findShenzhijieRules(String name);
+
+    /**
+     * 赋值属性,可以去除
+     */
+    ShenTestTableCopy copyResult();
+
+
 }

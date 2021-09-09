@@ -1,0 +1,13 @@
+package rules.shop_card;
+import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
+dialect  "mvel"
+
+/*全局变量*/
+global java.util.Map summer_price_map;
+
+rule "summer-pri-full-1000-20"
+salience 1000
+    when
+    $shenTestTable:ShenTestTable()
+    then
+end

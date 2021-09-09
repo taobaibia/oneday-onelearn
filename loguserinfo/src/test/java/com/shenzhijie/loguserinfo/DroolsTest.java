@@ -1,7 +1,7 @@
 package com.shenzhijie.loguserinfo;
 
-import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo;
-import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable;
+import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTable;
+import com.shenzhijie.loguserinfo.web.base.entity.rulePojo.DroolsPojo;
 import lombok.extern.slf4j.Slf4j;
 import org.drools.core.base.RuleNameStartsWithAgendaFilter;
 import org.junit.jupiter.api.Test;
@@ -72,5 +72,4 @@ public class DroolsTest {
         System.out.println("执行后--------" + map);
         kieSession.dispose();
     }
-
 }

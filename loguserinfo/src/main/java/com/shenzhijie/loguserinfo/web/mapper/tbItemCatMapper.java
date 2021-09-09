@@ -1,7 +1,7 @@
 package com.shenzhijie.loguserinfo.web.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shenzhijie.loguserinfo.web.base.entity.tbItemCat;
+import com.shenzhijie.loguserinfo.web.base.entity.other.tbItemCat;
 
 /**
  * All rights Reserved, Designed By www.info4z.club

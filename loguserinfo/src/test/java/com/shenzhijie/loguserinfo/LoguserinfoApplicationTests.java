@@ -2,8 +2,8 @@ package com.shenzhijie.loguserinfo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.shenzhijie.loguserinfo.web.base.entity.Registered;
-import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable;
+import com.shenzhijie.loguserinfo.web.base.entity.other.Registered;
+import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTable;
 import com.shenzhijie.loguserinfo.web.mapper.ShenTestTableMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

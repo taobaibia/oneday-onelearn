@@ -1,7 +1,7 @@
 package com.shenzhijie.loguserinfo.web.srevice;
 
 import com.shenzhijie.loguserinfo.common.utils.KieSessionUtils;
-import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo;
+import com.shenzhijie.loguserinfo.web.base.entity.rulePojo.DroolsPojo;
 import lombok.extern.slf4j.Slf4j;
 import org.drools.core.base.RuleNameStartsWithAgendaFilter;
 import org.kie.api.KieBase;
@@ -45,8 +45,8 @@ public class RuleService {
     public void rule_service(String name) throws Exception {
         KieSession kieSession = KieSessionUtils.createKieSessionFromDRL(
                 "package rules.xuhui\n" +
-                        "import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable\n" +
-                        "import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo\n" +
+                        "import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTable\n" +
+                        "import com.shenzhijie.loguserinfo.web.base.entity.rulePojo.DroolsPojo\n" +
                         "global java.util.Map mapResult;\n" +
                         "rule \"BoardThousand\"\n" +
                         "    salience 8\n" +

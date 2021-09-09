@@ -1,6 +1,6 @@
 package rules.xuhui
 import com.shenzhijie.loguserinfo.web.base.entity.ShenTestTable
-import com.shenzhijie.loguserinfo.web.base.entity.DroolsPojo
+import com.shenzhijie.loguserinfo.web.base.entity.rulePojo.DroolsPojo
 
 /*全局变量*/
 global java.util.Map mapResult;

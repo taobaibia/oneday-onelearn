@@ -2,8 +2,8 @@ package com.shenzhijie.loguserinfo.web.srevice.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shenzhijie.loguserinfo.web.base.entity.LoginINFO;
-import com.shenzhijie.loguserinfo.web.base.entity.Registered;
+import com.shenzhijie.loguserinfo.web.base.entity.other.LoginINFO;
+import com.shenzhijie.loguserinfo.web.base.entity.other.Registered;
 import com.shenzhijie.loguserinfo.web.base.result.ResultWrapper;
 import com.shenzhijie.loguserinfo.web.mapper.LoginMapper;
 import com.shenzhijie.loguserinfo.web.mapper.RegisteredMapper;
