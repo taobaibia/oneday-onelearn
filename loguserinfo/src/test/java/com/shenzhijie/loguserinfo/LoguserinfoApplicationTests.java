@@ -5,18 +5,27 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.shenzhijie.loguserinfo.web.base.entity.other.Registered;
 import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTable;
 import com.shenzhijie.loguserinfo.web.mapper.ShenTestTableMapper;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import reactor.core.publisher.Flux;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
+import java.util.stream.Stream;
 
-@SpringBootTest
+//@SpringBootTest
 @Slf4j
 class LoguserinfoApplicationTests {
     @Autowired
@@ -145,5 +154,158 @@ class LoguserinfoApplicationTests {
         System.out.println(T.class.getClassLoader());
         System.out.println(T.class.getClassLoader().getParent());
         System.out.println(T.class.getClassLoader().getParent().getParent());
+    }
+
+    /*同步*/
+    @Test
+    public void testRxjava1() {
+        /**Observable被观察者*/
+        Observable<String> dog = Observable.create(new ObservableOnSubscribe<String>() {
+            /**observableEmitter发射器,发射体*/
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> observableEmitter) throws Exception {
+                /**无限次使用onNext*/
+                System.out.println(Thread.currentThread().getName());
+                observableEmitter.onNext("1");
+                Thread.sleep(3000);
+                System.out.println(Thread.currentThread().getName());
+                observableEmitter.onNext("2");
+                Thread.sleep(3000);
+                System.out.println(Thread.currentThread().getName());
+                observableEmitter.onNext("3");
+                Thread.sleep(3000);
+                System.out.println(Thread.currentThread().getName());
+                observableEmitter.onNext("4");
+                Thread.sleep(3000);
+                System.out.println(Thread.currentThread().getName());
+                observableEmitter.onComplete();
+                System.out.println(Thread.currentThread().getName());
+            }
+        });
+        /**观察者Observer*/
+        Observer<String> cat = new Observer<String>() {
+
+            @Override
+            public void onSubscribe(@NonNull Disposable disposable) {
+                System.out.println("onSubscribe" + disposable);
+            }
+
+            @Override
+            public void onNext(@NonNull String s) {
+                System.out.println("onNext" + s);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                System.out.println("onError" + throwable);
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("onComplete");
+            }
+        };
+        /**关联起来,观察者和被观察者*/
+        dog.subscribe(cat);
+    }
+
+    /*异步*/
+    @Test
+    public void testRxjava2() throws InterruptedException {
+        /*被观察者*/
+        Observable.create(new ObservableOnSubscribe<String>() {
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<String> observableEmitter) throws Exception {
+                        observableEmitter.onNext("1");
+                        observableEmitter.onNext("2");
+                        observableEmitter.onNext("3");
+                        observableEmitter.onNext("4");
+                        observableEmitter.onNext("5");
+                        observableEmitter.onComplete();
+                    }
+                })
+                /*哪个线程是观察者*/
+                .observeOn(
+                        Schedulers.computation()
+                )
+                .subscribeOn(Schedulers.computation())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        System.out.println("onSubscribe..." + disposable);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String s) {
+                        System.out.println("onNext" + s);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        System.out.println("onError" + throwable);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        System.out.println("onComplete");
+                    }
+                })
+        ;
+        /*要在main中测试*/
+//        Thread.sleep(10000);
+    }
+
+    /*消息和订阅*/
+    @Test
+    public void ReactorTest() throws Exception {
+        String[] s = {"xx", "00"};
+        /**flux1发布者 被观察者*/
+        Flux<String> flux1 = Flux.just(s);
+        /**println订阅者 观察者*/
+        flux1.subscribe(System.out::println);
+        System.out.println("-------------");
+
+        /**flux1发布者 被观察者*/
+        Flux<String> flux2 = Flux.just("xx", "00", "yy");
+        /**println订阅者 观察者*/
+        flux2.subscribe(System.out::println);
+        System.out.println("--------------");
+
+        List<String> list = new ArrayList<>();
+        list.add("hello");
+        list.add("world");
+        Flux<String> flux3 = Flux.fromIterable(list);
+        flux3.subscribe(System.out::println);
+        System.out.println("---------------");
+
+        Stream<String> stream = Stream.of("hi", "java");
+        Flux<String> flux4 = Flux.fromStream(stream);
+        flux4.subscribe(System.out::println);
+        System.out.println("---------------");
+
+        Flux<Integer> range = Flux.range(1, 5);
+        range.subscribe(System.out::println);
+        System.out.println("---------------");
+
+        /*合并*/
+        Flux<String> mergeWith = flux2.mergeWith(flux3);
+        mergeWith.subscribe(System.out::println);
+        System.out.println("-------同步动态创建,nest只能调用一次--------");
+
+        /*同步动态创建,nest只能调用一次*/
+        Flux.generate(sink -> {
+            sink.next("xx");
+            sink.complete();
+        }).subscribe(System.out::println);
+
+        System.out.println("-------可以多次--------");
+
+        /*异步动态创建,nest可以多次*/
+        Flux.create(sink -> {
+            for (int i = 0; i < 1000; i++) {
+                sink.next("xx" + i);
+            }
+            sink.complete();
+        }).subscribe(System.out::println);
     }
 }

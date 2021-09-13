@@ -1,6 +1,7 @@
 package com.shenzhijie.loguserinfo.web.base.entity.other;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -58,7 +59,10 @@ public class ShenTestTable implements Serializable {
 
     /**
      * remark 描述:备注
+     *
+     * @JsonIgnore可以不返回此字段
      */
+    @JsonIgnore
     private String remark;
 
     /**

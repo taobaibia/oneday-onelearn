@@ -94,7 +94,7 @@ public class RegisteredController {
     public Map<String, Object> selectAll(@RequestParam String name) {
         Map<String, Object> map = new HashMap<>();
         List<IsipProjectBoard> boardAll = leetCodeService.findBoardAll(name);
-        List<ShenTestTable> shenJayTable = leetCodeService.findShenJayTable();
+        List<ShenTestTableReq> shenJayTable = leetCodeService.findShenJayTable();
         List<tbItemCat> tbItemCats = leetCodeService.findtbItemCat();
         map.put("boardResult-isip-master", boardAll);
         map.put("JayTableResult-local-slave_1", shenJayTable);

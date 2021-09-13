@@ -24,6 +24,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                         "/doc.html",
                         "/code/**")
                 .excludePathPatterns("/log/login")
+                .excludePathPatterns("/flux-web/*")
                 .excludePathPatterns("/log/Registered")
                 .excludePathPatterns("/log/test-verify")
                 .excludePathPatterns("/log/edit")

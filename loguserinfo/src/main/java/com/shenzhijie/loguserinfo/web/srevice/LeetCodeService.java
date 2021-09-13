@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shenzhijie.loguserinfo.web.base.entity.other.IsipProjectBoard;
 import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTable;
+import com.shenzhijie.loguserinfo.web.base.entity.other.ShenTestTableReq;
 import com.shenzhijie.loguserinfo.web.base.entity.other.tbItemCat;
 import com.shenzhijie.loguserinfo.web.mapper.IsipProjectBoardMapper;
 import com.shenzhijie.loguserinfo.web.mapper.ShenTestTableMapper;
 import com.shenzhijie.loguserinfo.web.mapper.tbItemCatMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,10 +67,19 @@ public class LeetCodeService extends ServiceImpl<IsipProjectBoardMapper, IsipPro
     }
 
     @DS("master")
-    public List<ShenTestTable> findShenJayTable() {
+    public List<ShenTestTableReq> findShenJayTable() {
         QueryWrapper<ShenTestTable> wrapper = new QueryWrapper<>();
-        wrapper.lambda().like(ShenTestTable::getName, "申");
-        return shenTestTableMapper.selectList(wrapper);
+        wrapper.lambda()
+                .like(ShenTestTable::getName, "申")
+        ;
+        ShenTestTableReq req = new ShenTestTableReq();
+        List<ShenTestTableReq> tableReqs = new ArrayList<>();
+        List<ShenTestTable> shenTestTables = shenTestTableMapper.selectList(wrapper);
+        for (ShenTestTable table : shenTestTables) {
+            BeanUtils.copyProperties(table, req);
+            tableReqs.add(req);
+        }
+        return tableReqs;
     }
 
     @DS("slave_2")

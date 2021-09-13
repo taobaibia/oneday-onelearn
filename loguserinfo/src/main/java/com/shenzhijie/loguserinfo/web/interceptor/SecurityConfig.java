@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/code/**").permitAll()
                 .antMatchers("/log/**").permitAll()
+                .antMatchers("/flux-web/**").permitAll()
                 .antMatchers("/check-code/**").permitAll()
                 .antMatchers("/Slider-image/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
